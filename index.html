@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Counter</title></head>
+<body>
+    
+  <button id="button">+1</button>
+  <span id="number">0</span>
+
+  <script>
+    //im a furry :3
+    //noo why are you reading this
+    //dont read this its a secret
+    //ok fine you can read this but dont tell anyone
+    //make button and number elements 
+    const button = document.getElementById("button");
+    const numberElement = document.getElementById("number");
+
+    // an async function is a function that can use the "await" keyword to wait for promises to resolve.
+    //a promise is kinda like a pcall ?
+    async function fetchCounter() {
+        //fetch is a built in function that makes an HTTP request and returns a promise that resolves to the response.
+      const res = await fetch("https://sred-node-js.onrender.com/counter");
+      const json = await res.json();
+      numberElement.textContent = json.value;
+    }
+
+    // Increment on click (POST)
+    button.addEventListener("click", async () => {
+        //when the button is clicked, make a POST request to /counter/increment to increment the counter on the server.
+      const res = await fetch("https://sred-node-js.onrender.com/counter/increment", { method: "POST" });
+      const json = await res.json();
+      numberElement.textContent = json.value;
+    });
+    //update the counter value on page load by fetching it from the server.
+    fetchCounter();
+  </script>
+</body>
+</html>
